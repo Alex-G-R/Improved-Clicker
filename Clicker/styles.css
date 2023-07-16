@@ -1,0 +1,32 @@
+body {
+    font-family: Arial;
+    background-color: rgb(40, 141, 243);
+    text-align: center;
+    align-items: center;
+}
+.container {
+    display: flex;
+}
+.box {
+    flex: 1;
+}
+#clickButton {
+    height: 100px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1.2em;
+    background-color: lawngreen;
+    border: solid black 4px;
+}
+.stats{
+    font-size: 1.7em;
+}
+.btnU {
+    height: 80px;
+    width: 200px;
+    background-color: red;
+    font-weight: 900;
+    border-radius: 20%;
+}
+
+
