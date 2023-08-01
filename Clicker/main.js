@@ -1,6 +1,4 @@
 
-
-
 import { upgradeCheck } from "./util.js";
 import {
     clickButton,
@@ -16,12 +14,30 @@ import {
     up10,
     up11,
     up12,
+    up13,
+    up14,
+    up15,
+    up16,
+    up17,
+    up18,
     automaticUpgrade1,
     automaticUpgrade2,
     automaticUpgrade3,
     automaticUpgrade4,
     automaticUpgrade5,
     automaticUpgrade6,
+    automaticUpgrade7,
+    automaticUpgrade8,
+    automaticUpgrade9,
+    automaticUpgrade10,
+    automaticUpgrade11,
+    automaticUpgrade12,
+    automaticUpgrade13,
+    automaticUpgrade14,
+    automaticUpgrade15,
+    automaticUpgrade16,
+    automaticUpgrade17,
+    automaticUpgrade18,
 } from "./common.js";
 
 
@@ -61,6 +77,7 @@ const pageButtonPrevious = document.querySelectorAll('.buttonPagePrevious')
 
 const pageOne = document.getElementById("pageOne");
 const pageTwo = document.getElementById("pageTwo");
+const pageThree = document.getElementById("pageThree");
 
 const showPageNumber = document.querySelectorAll('.pageCounter');
 
@@ -69,8 +86,15 @@ pageButtonNext.forEach((button) => {
         if(currentPage == 1) {
             pageOne.style.display = 'none';
             pageTwo.style.display = 'block';
+            pageThree.style.display = 'none';
             changePage(2);
             currentPage = 2;
+        } else if(currentPage == 2) {
+            pageOne.style.display = 'none';
+            pageTwo.style.display = 'none';
+            pageThree.style.display = 'block';
+            changePage(3);
+            currentPage = 3;
         }
     });
 });
@@ -79,8 +103,61 @@ pageButtonPrevious.forEach((button) => {
         if(currentPage == 2) {
             pageOne.style.display = 'block';
             pageTwo.style.display = 'none';
+            pageTwo.style.display = 'none';
             changePage(1);
             currentPage = 1;
+        } else if(currentPage == 3) {
+            pageOne.style.display = 'none';
+            pageTwo.style.display = 'block';
+            pageThree.style.display = 'none';
+            changePage(2);
+            currentPage = 2;
+        }
+    });
+});
+// page change in auto
+
+let currentPageAuto = 1;
+const pageButtonNextAuto = document.querySelectorAll('.buttonPageNextAuto')
+const pageButtonPreviousAuto = document.querySelectorAll('.buttonPagePreviousAuto')
+
+const autoPageOne = document.getElementById("autoPageOne");
+const autoPageTwo = document.getElementById("autoPageTwo");
+const autoPageThree = document.getElementById("autoPageThree");
+
+const showPageNumberAuto = document.querySelectorAll('.pageCounter');
+
+pageButtonNextAuto.forEach((button) => {
+    button.addEventListener("click", e => {
+        if(currentPageAuto == 1) {
+            autoPageOne.style.display = 'none';
+            autoPageTwo.style.display = 'block';
+            autoPageThree.style.display = 'none';
+            changePageAuto(2);
+            currentPageAuto = 2;
+        } else if(currentPageAuto == 2) {
+            autoPageOne.style.display = 'none';
+            autoPageTwo.style.display = 'none';
+            autoPageThree.style.display = 'block';
+            changePageAuto(3);
+            currentPageAuto = 3;
+        }
+    });
+});
+pageButtonPreviousAuto.forEach((button) => {
+    button.addEventListener("click", e => {
+        if(currentPageAuto == 2) {
+            autoPageOne.style.display = 'block';
+            autoPageTwo.style.display = 'none';
+            autoPageTwo.style.display = 'none';
+            changePageAuto(1);
+            currentPageAuto = 1;
+        } else if(currentPageAuto == 3) {
+            autoPageOne.style.display = 'none';
+            autoPageTwo.style.display = 'block';
+            autoPageThree.style.display = 'none';
+            changePageAuto(2);
+            currentPageAuto = 2;
         }
     });
 });
@@ -158,6 +235,43 @@ up12.addEventListener("click", e => {
     }
 })
 
+up13.addEventListener("click", e => {
+    if(clicks >= 14000000000) {
+        upgrade(14000000000, 500000000)
+    }
+})
+
+up14.addEventListener("click", e => {
+    if(clicks >= 60000000000) {
+        upgrade(60000000000, 2000000000)
+    }
+})
+
+up15.addEventListener("click", e => {
+    if(clicks >= 300000000000) {
+        upgrade(300000000000, 10000000000)
+    }
+})
+
+up16.addEventListener("click", e => {
+    if(clicks >= 1000000000000) {
+        upgrade(1000000000000, 50000000000)
+    }
+})
+
+up17.addEventListener("click", e => {
+    if(clicks >= 9000000000000) {
+        upgrade(9000000000000, 500000000000)
+    }
+})
+
+up18.addEventListener("click", e => {
+    if(clicks >= 150000000000000) {
+        upgrade(150000000000000, 10000000000000)
+    }
+})
+
+// auto upgrades
 let controlNumber = 0;
 automaticUpgrade1.addEventListener("click", e => {
     if(clicks >= 75) {
@@ -207,6 +321,101 @@ automaticUpgrade6.addEventListener("click", e => {
     }
 })
 
+automaticUpgrade7.addEventListener("click", e => {
+    if(clicks >= 500000) {
+        clicks -= 500000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(10000);
+    }
+})
+
+automaticUpgrade8.addEventListener("click", e => {
+    if(clicks >= 2300000) {
+        clicks -= 2300000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(50000);
+    }
+})
+
+automaticUpgrade9.addEventListener("click", e => {
+    if(clicks >= 7000000) {
+        clicks -= 7000000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(200000);
+    }
+})
+
+automaticUpgrade10.addEventListener("click", e => {
+    if(clicks >= 25000000) {
+        clicks -= 25000000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(800000);
+    }
+})
+
+automaticUpgrade11.addEventListener("click", e => {
+    if(clicks >= 150000000) {
+        clicks -= 150000000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(5000000);
+    }
+})
+
+automaticUpgrade12.addEventListener("click", e => {
+    if(clicks >= 600000000) {
+        clicks -= 600000000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(25000000);
+    }
+})
+
+automaticUpgrade13.addEventListener("click", e => {
+    if(clicks >= 10000000000) {
+        clicks -= 10000000000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(500000000);
+    }
+})
+
+automaticUpgrade14.addEventListener("click", e => {
+    if(clicks >= 40000000000) {
+        clicks -= 40000000000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(2000000000);
+    }
+})
+
+automaticUpgrade15.addEventListener("click", e => {
+    if(clicks >= 180000000000) {
+        clicks -= 180000000000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(10000000000);
+    }
+})
+
+automaticUpgrade16.addEventListener("click", e => {
+    if(clicks >= 800000000000) {
+        clicks -= 800000000000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(50000000000);
+    }
+})
+
+automaticUpgrade17.addEventListener("click", e => {
+    if(clicks >= 7000000000000) {
+        clicks -= 7000000000000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(500000000000);
+    }
+})
+
+automaticUpgrade18.addEventListener("click", e => {
+    if(clicks >= 120000000000000) {
+        clicks -= 120000000000000
+        document.getElementById("score").innerHTML = clicks;
+        automaticUpgrade(10000000000000);
+    }
+})
 
 //cheats
 export const cheat = document.getElementById("cheat");
@@ -216,7 +425,7 @@ cheat.addEventListener("click", e => {
     document.getElementById("score").innerHTML = clicks;
 })
 cheat2.addEventListener("click", e => {
-    clicks += 1000000;
+    clicks += 500000000000;
     document.getElementById("score").innerHTML = clicks;
 })
 
@@ -239,6 +448,12 @@ function stopIncrement() {
 // functions
 function changePage (x) {
     showPageNumber.forEach((page) => {
+        page.innerHTML = "Current page: "+x
+    });
+}
+
+function changePageAuto (x) {
+    showPageNumberAuto.forEach((page) => {
         page.innerHTML = "Current page: "+x
     });
 }

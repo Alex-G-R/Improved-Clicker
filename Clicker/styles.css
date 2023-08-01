@@ -32,8 +32,20 @@ body {
 #pageTwo {
     display: none;
 }
+#pageThree {
+    display: none;
+}
+#autoPageTwo {
+    display: none;
+}
+#autoPageThree {
+    display: none;
+}
 
-.buttonPageNext, .buttonPagePrevious {
+.buttonPageNext,
+.buttonPagePrevious,
+.buttonPageNextAuto,
+.buttonPagePreviousAuto {
     height: 20px;
     width: 30px;
     background-color: rgb(137, 137, 245);
