@@ -48,8 +48,13 @@ body {
 .buttonPagePreviousAuto {
     height: 20px;
     width: 30px;
-    background-color: rgb(137, 137, 245);
+    background-color: rgb(165, 236, 177);
     border: 1px black solid;
 }
 
+#resetButton{
+    height: 40px;
+    width: 200px;
+    background-color: rgb(165, 236, 177);
+}
 
