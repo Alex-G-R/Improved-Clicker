@@ -62,7 +62,7 @@ openSettings.addEventListener("click", e => {
 });
 
 
-// language
+// settings - language
 const openLanguage = document.getElementById("language");
 const languageWin = document.getElementById("language-gui");
 let langStatus = 0;
@@ -77,7 +77,7 @@ openLanguage.addEventListener("click", e => {
     }
 });
 
-// sound mute
+// settings - sound mute
 const soundMuteButton = document.getElementById("sound");
 let soundStatus = 0;
 
@@ -143,6 +143,38 @@ function afterResetMultiplayer () {
 
 resetButton.addEventListener("click", reset)
 
+function reset() {
+    clicks = 0;
+    value = 1;
+    document.getElementById("clickValue").innerHTML = "Click Value: " + value;
+
+    currentMultiplayer = newMultiplayer;
+    currentMultiplayerShow.innerHTML = "Current Multiplayer: x" + currentMultiplayer.toFixed(4)
+
+    automaticValue = 0;
+    controlNumber = 0;
+    stopIncrement();
+    gainPerSecond.innerHTML = "Gain per sec: 0"; 
+
+    autoPageOne.style.display = 'block';
+    autoPageTwo.style.display = 'none';
+    autoPageThree.style.display = 'none';
+    changePageAuto(1);
+    currentPageAuto = 1;
+    updateAutoButtonColors()
+
+    pageOne.style.display = 'block';
+    pageTwo.style.display = 'none';
+    pageThree.style.display = 'none';
+    changePage(1);
+    currentPage = 1;
+    updateButtonColors()
+
+    if(soundStatus == 0) {
+        document.getElementById("resetMusic").play();
+    }
+}
+
 // any document click will result in incrementing total clicks and checking if upgrades are avelibable
 document.addEventListener("click", e =>{
     totalClick += 1;
@@ -184,6 +216,12 @@ const pageTwo = document.getElementById("pageTwo");
 const pageThree = document.getElementById("pageThree");
 
 const showPageNumber = document.querySelectorAll('.pageCounter');
+
+function changePage (x) {
+    showPageNumber.forEach((page) => {
+        page.innerHTML = "Current page: "+x
+    });
+}
 
 function updateButtonColors() {
     if (currentPage === 1) {
@@ -263,6 +301,12 @@ const autoPageThree = document.getElementById("autoPageThree");
 
 const showPageNumberAuto = document.querySelectorAll('.pageCounterAuto');
 
+function changePageAuto (x) {
+    showPageNumberAuto.forEach((page) => {
+        page.innerHTML = "Current page: "+x
+    });
+}
+
 function updateAutoButtonColors() {
     if (currentPageAuto === 1) {
         // On auto page one - set previous button color to red - next button to default
@@ -330,7 +374,22 @@ pageButtonPreviousAuto.forEach((button) => {
     });
 });
 
-// Upgrades
+// Upgrades system
+
+function upgrade (cost, addVal, progress) {
+    if(clicks >= cost) {
+        clicks = clicks - cost;
+        document.getElementById("score").innerHTML = clicks.toFixed(2);
+        value += addVal;
+        document.getElementById("clickValue").innerHTML = "Click Value: "+value;
+        newMultiplayer = newMultiplayer + progress
+        if(soundStatus == 0) {
+            document.getElementById("upgradeMusic").play();
+        }
+    }
+}
+
+
 up1.addEventListener("click", e => {
     upgrade(100, 1, 0.0001)
 })
@@ -404,6 +463,32 @@ up18.addEventListener("click", e => {
 })
 
 // auto upgrades
+let gainPerSecond = document.getElementById("gain");
+gainPerSecond.innerHTML = "Gain per sec: 0"; 
+
+function autoUpgrade (cost, gain, progress) {
+    if(clicks >= cost) {
+        clicks -= cost
+        document.getElementById("score").innerHTML = clicks.toFixed(2);
+        newMultiplayer = newMultiplayer + progress;
+        if (controlNumber == 0) {
+            controlNumber = 1;
+            automaticValue = automaticValue + gain;
+            document.getElementById("clickValue").innerHTML = "Click Value: " + value;
+            startIncrement();
+            gainPerSecond.innerHTML = "Gain per sec: " + automaticValue;
+            if(soundStatus == 0) {
+                document.getElementById("upgradeMusic").play();
+            }
+        } else {
+            automaticValue = automaticValue + gain;
+            gainPerSecond.innerHTML = "Gain per sec: " + automaticValue;
+            if(soundStatus == 0) {
+                document.getElementById("upgradeMusic").play();
+            }
+        }
+    }
+}
 let controlNumber = 0;
 automaticUpgrade1.addEventListener("click", e => {
     autoUpgrade(75,1, 0.0001)
@@ -460,20 +545,7 @@ automaticUpgrade18.addEventListener("click", e => {
     autoUpgrade(120000000000000,500000000000, 0.2)
 })
 
-//cheats
-//export const cheat = document.getElementById("cheat");
-//export const cheat2 = document.getElementById("cheat2");
-//cheat.addEventListener("click", e => {
-//    clicks += 100000;
-//    document.getElementById("score").innerHTML = clicks.toFixed(2);
-//})
-//cheat2.addEventListener("click", e => {
-//    clicks += 500000000000;
-//    document.getElementById("score").innerHTML = clicks.toFixed(2);
-//})
-
-
-// Automatic incremenatation functions
+// Auto upgrades - Automatic incremenatation functions
 let intervalId = null;
 let automaticValue = 0;
 
@@ -491,90 +563,14 @@ function stopIncrement() {
   clearInterval(intervalId);
 };
 
-// functions
-function changePage (x) {
-    showPageNumber.forEach((page) => {
-        page.innerHTML = "Current page: "+x
-    });
-}
-
-function changePageAuto (x) {
-    showPageNumberAuto.forEach((page) => {
-        page.innerHTML = "Current page: "+x
-    });
-}
-
-function upgrade (cost, addVal, progress) {
-    if(clicks >= cost) {
-        clicks = clicks - cost;
-        document.getElementById("score").innerHTML = clicks.toFixed(2);
-        value += addVal;
-        document.getElementById("clickValue").innerHTML = "Click Value: "+value;
-        newMultiplayer = newMultiplayer + progress
-        if(soundStatus == 0) {
-            document.getElementById("upgradeMusic").play();
-        }
-    }
-}
-
-
-let gainPerSecond = document.getElementById("gain");
-gainPerSecond.innerHTML = "Gain per sec: 0"; 
-
-
-function autoUpgrade (cost, gain, progress) {
-    if(clicks >= cost) {
-        clicks -= cost
-        document.getElementById("score").innerHTML = clicks.toFixed(2);
-        newMultiplayer = newMultiplayer + progress;
-        if (controlNumber == 0) {
-            controlNumber = 1;
-            automaticValue = automaticValue + gain;
-            document.getElementById("clickValue").innerHTML = "Click Value: " + value;
-            startIncrement();
-            gainPerSecond.innerHTML = "Gain per sec: " + automaticValue;
-            if(soundStatus == 0) {
-                document.getElementById("upgradeMusic").play();
-            }
-        } else {
-            automaticValue = automaticValue + gain;
-            gainPerSecond.innerHTML = "Gain per sec: " + automaticValue;
-            if(soundStatus == 0) {
-                document.getElementById("upgradeMusic").play();
-            }
-        }
-    }
-}
-
-
-function reset() {
-    clicks = 0;
-    value = 1;
-    document.getElementById("clickValue").innerHTML = "Click Value: " + value;
-
-    currentMultiplayer = newMultiplayer;
-    currentMultiplayerShow.innerHTML = "Current Multiplayer: x" + currentMultiplayer.toFixed(4)
-
-    automaticValue = 0;
-    controlNumber = 0;
-    stopIncrement();
-    gainPerSecond.innerHTML = "Gain per sec: 0"; 
-
-    autoPageOne.style.display = 'block';
-    autoPageTwo.style.display = 'none';
-    autoPageThree.style.display = 'none';
-    changePageAuto(1);
-    currentPageAuto = 1;
-    updateAutoButtonColors()
-
-    pageOne.style.display = 'block';
-    pageTwo.style.display = 'none';
-    pageThree.style.display = 'none';
-    changePage(1);
-    currentPage = 1;
-    updateButtonColors()
-
-    if(soundStatus == 0) {
-        document.getElementById("resetMusic").play();
-    }
-}
+//cheats
+//export const cheat = document.getElementById("cheat");
+//export const cheat2 = document.getElementById("cheat2");
+//cheat.addEventListener("click", e => {
+//    clicks += 100000;
+//    document.getElementById("score").innerHTML = clicks.toFixed(2);
+//})
+//cheat2.addEventListener("click", e => {
+//    clicks += 500000000000;
+//    document.getElementById("score").innerHTML = clicks.toFixed(2);
+//})
