@@ -78,6 +78,7 @@ function hideYellowSquare() {
 function onClickYellowSquare() {
     clicks = clicks + value * currentMultiplayer * Math.floor(Math.random()*14)
     hideYellowSquare();
+    document.getElementById("bonus").play();
 }
 
 setInterval(showYellowSquare, 10000); // Repeat the process every 10 seconds
@@ -121,6 +122,8 @@ clickButton.addEventListener("mouseup", e => {
     upgradeCheck(clicks)
 
     newMultiplayer = newMultiplayer + 0.00001
+
+    document.getElementById("clickMusic").play();
 })
 
 // page change
@@ -407,6 +410,7 @@ function startIncrement() {
     clicks = clicks + automaticValue * currentMultiplayer;
     document.getElementById("score").innerHTML = clicks.toFixed(2);
     upgradeCheck(clicks);
+    document.getElementById("clickMusic").play();
   }, 1000);
 };
 function stopIncrement() {
@@ -433,6 +437,7 @@ function upgrade (cost, addVal, progress) {
         value += addVal;
         document.getElementById("clickValue").innerHTML = "Click Value: "+value;
         newMultiplayer = newMultiplayer + progress
+        document.getElementById("upgradeMusic").play();
     }
 }
 
@@ -452,9 +457,11 @@ function autoUpgrade (cost, gain, progress) {
             document.getElementById("clickValue").innerHTML = "Click Value: " + value;
             startIncrement();
             gainPerSecond.innerHTML = "Gain per sec: " + automaticValue;
+            document.getElementById("upgradeMusic").play();
         } else {
             automaticValue = automaticValue + gain;
             gainPerSecond.innerHTML = "Gain per sec: " + automaticValue;
+            document.getElementById("upgradeMusic").play();
         }
     }
 }
@@ -486,4 +493,6 @@ function reset() {
     changePage(1);
     currentPage = 1;
     updateButtonColors()
+
+    document.getElementById("resetMusic").play();
 }
