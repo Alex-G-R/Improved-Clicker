@@ -47,6 +47,41 @@ let totalClick = 0;
 let value = 1;
 
 
+// pop up collectables system
+const yellowSquare = document.getElementById("yellow-square");
+yellowSquare.addEventListener("click", onClickYellowSquare);
+
+function getRandomPosition() {
+    const winWidth = window.innerWidth - 70;
+    const winHeight = window.innerHeight - 70;
+    const randomX = Math.floor(Math.random() * winWidth);
+    const randomY = Math.floor(Math.random() * winHeight);
+    return { x: randomX, y: randomY};
+}
+
+function showYellowSquare() {
+    const yellowSquare = document.getElementById("yellow-square");
+    const position = getRandomPosition();
+    yellowSquare.style.left = position.x + "px";
+    yellowSquare.style.top = position.y + "px";
+    yellowSquare.style.display = "flex";
+
+    const randomDuration = Math.floor(Math.random() * 6000) + 5000; // Between 5 to 10 seconds
+    setTimeout(hideYellowSquare, randomDuration);
+}
+
+function hideYellowSquare() {
+    const yellowSquare = document.getElementById("yellow-square");
+    yellowSquare.style.display = "none";
+}
+
+function onClickYellowSquare() {
+    clicks = clicks + value * currentMultiplayer * Math.floor(Math.random()*14)
+    hideYellowSquare();
+}
+
+setInterval(showYellowSquare, 10000); // Repeat the process every 10 seconds
+
 //reset system
 const resetButton = document.getElementById("resetButton");
 const currentMultiplayerShow = document.getElementById("multiplayer");
@@ -56,7 +91,7 @@ let currentMultiplayer = 1.00;
 let newMultiplayer = 1.00;
 
 function afterResetMultiplayer () {
-    newMultiplayerShow.innerHTML = "After Reset: x"+newMultiplayer.toFixed(4)
+    newMultiplayerShow.innerHTML = "After Reset: x"+newMultiplayer.toFixed(4);
 }
 
 resetButton.addEventListener("click", reset)
@@ -99,6 +134,22 @@ const pageThree = document.getElementById("pageThree");
 
 const showPageNumber = document.querySelectorAll('.pageCounter');
 
+function updateButtonColors() {
+    if (currentPage === 1) {
+        // On page one - set previous button color to red - next button to default
+        pageButtonPrevious.forEach(button => button.style.backgroundColor = 'red');
+        pageButtonNext.forEach(button => button.style.backgroundColor = '');
+    } else if (currentPage === 2) {
+        // On page two - set previous button color to rgb(165, 236, 177) - next button to default
+        pageButtonPrevious.forEach(button => button.style.backgroundColor = 'rgb(165, 236, 177)');
+        pageButtonNext.forEach(button => button.style.backgroundColor = '');
+    } else if (currentPage === 3) {
+        // On page three - set next button color to red, previous button to rgb(165, 236, 177)
+        pageButtonPrevious.forEach(button => button.style.backgroundColor = 'rgb(165, 236, 177)');
+        pageButtonNext.forEach(button => button.style.backgroundColor = 'red');
+    }
+}
+
 pageButtonNext.forEach((button) => {
     button.addEventListener("click", e => {
         if(currentPage == 1) {
@@ -107,12 +158,14 @@ pageButtonNext.forEach((button) => {
             pageThree.style.display = 'none';
             changePage(2);
             currentPage = 2;
+            updateButtonColors()
         } else if(currentPage == 2) {
             pageOne.style.display = 'none';
             pageTwo.style.display = 'none';
             pageThree.style.display = 'block';
             changePage(3);
             currentPage = 3;
+            updateButtonColors()
         }
     });
 });
@@ -124,12 +177,14 @@ pageButtonPrevious.forEach((button) => {
             pageTwo.style.display = 'none';
             changePage(1);
             currentPage = 1;
+            updateButtonColors()
         } else if(currentPage == 3) {
             pageOne.style.display = 'none';
             pageTwo.style.display = 'block';
             pageThree.style.display = 'none';
             changePage(2);
             currentPage = 2;
+            updateButtonColors()
         }
     });
 });
@@ -143,7 +198,23 @@ const autoPageOne = document.getElementById("autoPageOne");
 const autoPageTwo = document.getElementById("autoPageTwo");
 const autoPageThree = document.getElementById("autoPageThree");
 
-const showPageNumberAuto = document.querySelectorAll('.pageCounter');
+const showPageNumberAuto = document.querySelectorAll('.pageCounterAuto');
+
+function updateAutoButtonColors() {
+    if (currentPageAuto === 1) {
+        // On auto page one - set previous button color to red - next button to default
+        pageButtonPreviousAuto.forEach(button => button.style.backgroundColor = 'red');
+        pageButtonNextAuto.forEach(button => button.style.backgroundColor = '');
+    } else if (currentPageAuto === 2) {
+        // On auto page two - set previous button color to rgb(165, 236, 177) - next button to default
+        pageButtonPreviousAuto.forEach(button => button.style.backgroundColor = 'rgb(165, 236, 177)');
+        pageButtonNextAuto.forEach(button => button.style.backgroundColor = '');
+    } else if (currentPageAuto === 3) {
+        // On auto page three - set next button color to red - previous button to rgb(165, 236, 177)
+        pageButtonPreviousAuto.forEach(button => button.style.backgroundColor = 'rgb(165, 236, 177)');
+        pageButtonNextAuto.forEach(button => button.style.backgroundColor = 'red');
+    }
+}
 
 pageButtonNextAuto.forEach((button) => {
     button.addEventListener("click", e => {
@@ -153,12 +224,14 @@ pageButtonNextAuto.forEach((button) => {
             autoPageThree.style.display = 'none';
             changePageAuto(2);
             currentPageAuto = 2;
+            updateAutoButtonColors()
         } else if(currentPageAuto == 2) {
             autoPageOne.style.display = 'none';
             autoPageTwo.style.display = 'none';
             autoPageThree.style.display = 'block';
             changePageAuto(3);
             currentPageAuto = 3;
+            updateAutoButtonColors()
         }
     });
 });
@@ -170,12 +243,14 @@ pageButtonPreviousAuto.forEach((button) => {
             autoPageTwo.style.display = 'none';
             changePageAuto(1);
             currentPageAuto = 1;
+            updateAutoButtonColors()
         } else if(currentPageAuto == 3) {
             autoPageOne.style.display = 'none';
             autoPageTwo.style.display = 'block';
             autoPageThree.style.display = 'none';
             changePageAuto(2);
             currentPageAuto = 2;
+            updateAutoButtonColors()
         }
     });
 });
@@ -277,44 +352,44 @@ automaticUpgrade7.addEventListener("click", e => {
     autoUpgrade(500000,10000, 0.0006)
 })
 automaticUpgrade8.addEventListener("click", e => {
-    autoUpgrade(2300000,50000), 0.0007
+    autoUpgrade(2300000,25000, 0.0007)
 })
 automaticUpgrade9.addEventListener("click", e => {
-    autoUpgrade(7000000,200000, 0.0008)
+    autoUpgrade(7000000,100000, 0.0008)
 })
 automaticUpgrade10.addEventListener("click", e => {
-    autoUpgrade(25000000,800000, 0.0009)
+    autoUpgrade(25000000,400000, 0.0009)
 })
 automaticUpgrade11.addEventListener("click", e => {
-    autoUpgrade(150000000,5000000, 0.001)
+    autoUpgrade(150000000,2500000, 0.001)
 })
 automaticUpgrade12.addEventListener("click", e => {
-    autoUpgrade(600000000,25000000, 0.003)
+    autoUpgrade(600000000,12000000, 0.003)
 })
 automaticUpgrade13.addEventListener("click", e => {
-    autoUpgrade(10000000000,500000000, 0.006)
+    autoUpgrade(10000000000,250000000, 0.006)
 })
 automaticUpgrade14.addEventListener("click", e => {
-    autoUpgrade(40000000000,2000000000, 0.009)
+    autoUpgrade(40000000000,1000000000, 0.009)
 })
 automaticUpgrade15.addEventListener("click", e => {
-    autoUpgrade(180000000000,10000000000, 0.01)
+    autoUpgrade(180000000000,5000000000, 0.01)
 })
 automaticUpgrade16.addEventListener("click", e => {
-    autoUpgrade(800000000000,50000000000, 0.03)
+    autoUpgrade(800000000000,25000000000, 0.03)
 })
 automaticUpgrade17.addEventListener("click", e => {
-    autoUpgrade(7000000000000,500000000000, 0.07)
+    autoUpgrade(7000000000000,50000000000, 0.07)
 })
 automaticUpgrade18.addEventListener("click", e => {
-    autoUpgrade(120000000000000,10000000000000, 0.2)
+    autoUpgrade(120000000000000,500000000000, 0.2)
 })
 
 //cheats
 export const cheat = document.getElementById("cheat");
 export const cheat2 = document.getElementById("cheat2");
 cheat.addEventListener("click", e => {
-    clicks += 1000;
+    clicks += 100000;
     document.getElementById("score").innerHTML = clicks.toFixed(2);
 })
 cheat2.addEventListener("click", e => {
@@ -397,4 +472,18 @@ function reset() {
     controlNumber = 0;
     stopIncrement();
     gainPerSecond.innerHTML = "Gain per sec: 0"; 
+
+    autoPageOne.style.display = 'block';
+    autoPageTwo.style.display = 'none';
+    autoPageThree.style.display = 'none';
+    changePageAuto(1);
+    currentPageAuto = 1;
+    updateAutoButtonColors()
+
+    pageOne.style.display = 'block';
+    pageTwo.style.display = 'none';
+    pageThree.style.display = 'none';
+    changePage(1);
+    currentPage = 1;
+    updateButtonColors()
 }
