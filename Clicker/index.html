@@ -8,23 +8,44 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="yellow-square"><span id="yellow-square-points">points!</span></div>
-    <audio id="resetMusic">
-        <source src="/Audio/mixkit-final-level-bonus-2061.wav">
-    </audio>
-    <audio id="clickMusic">
-        <source src="/Audio/mixkit-game-ball-tap-2073.wav">
-    </audio>
-    <audio id="upgradeMusic">
-        <source src="/Audio/mixkit-flute-alert-2307.wav">
-    </audio>
-    <audio id="bonus">
-        <source src="/Audio/success_bell-6776.mp3">
-    </audio>
+    <div>
+        <div id="yellow-square"><span id="yellow-square-points">points!</span></div>
+        <audio id="resetMusic">
+            <source src="/Audio/mixkit-final-level-bonus-2061.wav">
+        </audio>
+        <audio id="clickMusic">
+            <source src="/Audio/mixkit-game-ball-tap-2073.wav">
+        </audio>
+        <audio id="upgradeMusic">
+            <source src="/Audio/mixkit-flute-alert-2307.wav">
+        </audio>
+        <audio id="bonus">
+            <source src="/Audio/success_bell-6776.mp3">
+        </audio>
+        <audio id="page">
+            <source src="/Audio/443924__checholio__1-pasar-pagina.wav">
+        </audio>
+    </div>
 
     <input type="button" value="Click me" id="clickButton" class="btn"/>
 
-    <h1 id="score">0.00</h1>
+    <div>
+        <input type="button" id="settings-button" value="Settings">
+        <h1 id="score">0.00</h1>
+        <div id="settings-gui">
+            <div>
+                <input type="button" id="language" value="Language" class="settings-options">  
+                <div id="language-gui">
+                    <input type="button" id="polish" value="Polish/Polski(SOON)" class="settings-options">  
+                    <input type="button" id="english" value="English" class="settings-options">  
+                </div>
+            </div>
+            <div>
+                <input type="button" id="sound" value="Mute sound" class="settings-options">
+            </div>
+        </div>
+    </div>
+    
 
     <div class="container">
         <div class="box">
@@ -112,8 +133,10 @@
         </div>
     </div>
     <br> <br> 
-    <input type="button" value="Cheat +1000" id="cheat"/>
-    <input type="button" value="Cheat +10000" id="cheat2"/>
+    <!--  CHEATS, only for testing 
+        <input type="button" value="Cheat +1000" id="cheat"/>
+        <input type="button" value="Cheat +10000" id="cheat2"/>
+    --> 
 
 
     <script type="module" src="main.js"></script>

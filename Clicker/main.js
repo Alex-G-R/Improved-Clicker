@@ -46,6 +46,50 @@ let allClick = 0;
 let totalClick = 0;
 let value = 1;
 
+// setings
+const openSettings = document.getElementById("settings-button")
+const settingsWin = document.getElementById("settings-gui")
+let settingsStatus = 0;
+
+openSettings.addEventListener("click", e => {
+    if( settingsStatus == 0) {
+        settingsWin.style.display = "block";
+        settingsStatus = 1;
+    } else if ( settingsStatus == 1){
+        settingsWin.style.display = "none";
+        settingsStatus = 0;
+    }
+});
+
+
+// language
+const openLanguage = document.getElementById("language");
+const languageWin = document.getElementById("language-gui");
+let langStatus = 0;
+
+openLanguage.addEventListener("click", e => {
+    if( langStatus == 0) {
+        languageWin.style.display = "block";
+        langStatus = 1;
+    } else if ( langStatus == 1){
+        languageWin.style.display = "none";
+        langStatus = 0;
+    }
+});
+
+// sound mute
+const soundMuteButton = document.getElementById("sound");
+let soundStatus = 0;
+
+soundMuteButton.addEventListener("click", e => {
+    if(soundStatus == 0) {
+        soundMuteButton.style.backgroundColor = "green";
+        soundStatus = 1;
+    } else if (soundStatus == 1) {
+        soundMuteButton.style.backgroundColor = "rgb(162, 77, 77)";
+        soundStatus = 0;
+    }
+});
 
 // pop up collectables system
 const yellowSquare = document.getElementById("yellow-square");
@@ -78,7 +122,9 @@ function hideYellowSquare() {
 function onClickYellowSquare() {
     clicks = clicks + value * currentMultiplayer * Math.floor(Math.random()*14)
     hideYellowSquare();
-    document.getElementById("bonus").play();
+    if(soundStatus == 0) {
+        document.getElementById("bonus").play();
+    }
 }
 
 setInterval(showYellowSquare, 10000); // Repeat the process every 10 seconds
@@ -123,7 +169,9 @@ clickButton.addEventListener("mouseup", e => {
 
     newMultiplayer = newMultiplayer + 0.00001
 
-    document.getElementById("clickMusic").play();
+    if(soundStatus == 0) {
+        document.getElementById("clickMusic").play();
+    }
 })
 
 // page change
@@ -162,6 +210,9 @@ pageButtonNext.forEach((button) => {
             changePage(2);
             currentPage = 2;
             updateButtonColors()
+            if(soundStatus == 0) {
+                document.getElementById("page").play();
+            }
         } else if(currentPage == 2) {
             pageOne.style.display = 'none';
             pageTwo.style.display = 'none';
@@ -169,6 +220,9 @@ pageButtonNext.forEach((button) => {
             changePage(3);
             currentPage = 3;
             updateButtonColors()
+            if(soundStatus == 0) {
+                document.getElementById("page").play();
+            }
         }
     });
 });
@@ -181,6 +235,9 @@ pageButtonPrevious.forEach((button) => {
             changePage(1);
             currentPage = 1;
             updateButtonColors()
+            if(soundStatus == 0) {
+                document.getElementById("page").play();
+            }
         } else if(currentPage == 3) {
             pageOne.style.display = 'none';
             pageTwo.style.display = 'block';
@@ -188,6 +245,9 @@ pageButtonPrevious.forEach((button) => {
             changePage(2);
             currentPage = 2;
             updateButtonColors()
+            if(soundStatus == 0) {
+                document.getElementById("page").play();
+            }
         }
     });
 });
@@ -228,6 +288,9 @@ pageButtonNextAuto.forEach((button) => {
             changePageAuto(2);
             currentPageAuto = 2;
             updateAutoButtonColors()
+            if(soundStatus == 0) {
+                document.getElementById("page").play();
+            }
         } else if(currentPageAuto == 2) {
             autoPageOne.style.display = 'none';
             autoPageTwo.style.display = 'none';
@@ -235,6 +298,9 @@ pageButtonNextAuto.forEach((button) => {
             changePageAuto(3);
             currentPageAuto = 3;
             updateAutoButtonColors()
+            if(soundStatus == 0) {
+                document.getElementById("page").play();
+            }
         }
     });
 });
@@ -247,6 +313,9 @@ pageButtonPreviousAuto.forEach((button) => {
             changePageAuto(1);
             currentPageAuto = 1;
             updateAutoButtonColors()
+            if(soundStatus == 0) {
+                document.getElementById("page").play();
+            }
         } else if(currentPageAuto == 3) {
             autoPageOne.style.display = 'none';
             autoPageTwo.style.display = 'block';
@@ -254,6 +323,9 @@ pageButtonPreviousAuto.forEach((button) => {
             changePageAuto(2);
             currentPageAuto = 2;
             updateAutoButtonColors()
+            if(soundStatus == 0) {
+                document.getElementById("page").play();
+            }
         }
     });
 });
@@ -389,16 +461,16 @@ automaticUpgrade18.addEventListener("click", e => {
 })
 
 //cheats
-export const cheat = document.getElementById("cheat");
-export const cheat2 = document.getElementById("cheat2");
-cheat.addEventListener("click", e => {
-    clicks += 100000;
-    document.getElementById("score").innerHTML = clicks.toFixed(2);
-})
-cheat2.addEventListener("click", e => {
-    clicks += 500000000000;
-    document.getElementById("score").innerHTML = clicks.toFixed(2);
-})
+//export const cheat = document.getElementById("cheat");
+//export const cheat2 = document.getElementById("cheat2");
+//cheat.addEventListener("click", e => {
+//    clicks += 100000;
+//    document.getElementById("score").innerHTML = clicks.toFixed(2);
+//})
+//cheat2.addEventListener("click", e => {
+//    clicks += 500000000000;
+//    document.getElementById("score").innerHTML = clicks.toFixed(2);
+//})
 
 
 // Automatic incremenatation functions
@@ -410,7 +482,9 @@ function startIncrement() {
     clicks = clicks + automaticValue * currentMultiplayer;
     document.getElementById("score").innerHTML = clicks.toFixed(2);
     upgradeCheck(clicks);
-    document.getElementById("clickMusic").play();
+    if(soundStatus == 0) {
+        document.getElementById("clickMusic").play();
+    }
   }, 1000);
 };
 function stopIncrement() {
@@ -437,7 +511,9 @@ function upgrade (cost, addVal, progress) {
         value += addVal;
         document.getElementById("clickValue").innerHTML = "Click Value: "+value;
         newMultiplayer = newMultiplayer + progress
-        document.getElementById("upgradeMusic").play();
+        if(soundStatus == 0) {
+            document.getElementById("upgradeMusic").play();
+        }
     }
 }
 
@@ -457,11 +533,15 @@ function autoUpgrade (cost, gain, progress) {
             document.getElementById("clickValue").innerHTML = "Click Value: " + value;
             startIncrement();
             gainPerSecond.innerHTML = "Gain per sec: " + automaticValue;
-            document.getElementById("upgradeMusic").play();
+            if(soundStatus == 0) {
+                document.getElementById("upgradeMusic").play();
+            }
         } else {
             automaticValue = automaticValue + gain;
             gainPerSecond.innerHTML = "Gain per sec: " + automaticValue;
-            document.getElementById("upgradeMusic").play();
+            if(soundStatus == 0) {
+                document.getElementById("upgradeMusic").play();
+            }
         }
     }
 }
@@ -494,5 +574,7 @@ function reset() {
     currentPage = 1;
     updateButtonColors()
 
-    document.getElementById("resetMusic").play();
+    if(soundStatus == 0) {
+        document.getElementById("resetMusic").play();
+    }
 }
