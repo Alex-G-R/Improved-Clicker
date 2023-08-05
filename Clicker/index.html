@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clicker</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./Styles/styles.css">
+    <link rel="shortcut icon" href="#">
 </head>
 <body>
     <div>
@@ -51,34 +52,34 @@
         <div class="box">
             <h1>Upgrades</h1>
             <div id="pageOne">
-                <input type="button" value="+1 Cost(100)" id="upgrade1" class="btnU"/>
-                <input type="button" value="+5 Cost(475)" id="upgrade2" class="btnU"/>
-                <input type="button" value="+10 Cost(900)" id="upgrade3" class="btnU"/> <br> <br>
-                <input type="button" value="+50 Cost(4250)" id="upgrade4" class="btnU"/>
-                <input type="button" value="+100 Cost(8000)" id="upgrade5" class="btnU"/>
-                <input type="button" value="+1000 Cost(75.000)" id="upgrade6" class="btnU"/> <br> <br>
+                <input type="button" value="+1 Cost(100)" id="upgrade1" class="btnU" data-cost="100" data-addval="1" data-progress="0.0001"/>
+                <input type="button" value="+5 Cost(475)" id="upgrade2" class="btnU" data-cost="475" data-addval="5" data-progress="0.0002"/>
+                <input type="button" value="+10 Cost(900)" id="upgrade3" class="btnU" data-cost="900" data-addval="10" data-progress="0.0003"/> <br> <br>
+                <input type="button" value="+50 Cost(4250)" id="upgrade4" class="btnU" data-cost="4250" data-addval="50" data-progress="0.0004"/>
+                <input type="button" value="+100 Cost(8000)" id="upgrade5" class="btnU" data-cost="8000" data-addval="100" data-progress="0.0005"/>
+                <input type="button" value="+1000 Cost(75.000)" id="upgrade6" class="btnU" data-cost="75000" data-addval="1000" data-progress="0.0006"/> <br> <br>
                 <input type="button" value="<--" class="buttonPagePrevious">
                 <span class="pageCounter">Current page: 1</span>
                 <input type="button" value="-->" class="buttonPageNext">
             </div>
             <div id="pageTwo">
-                <input type="button" value="+10,000 Cost(700,000)" id="upgrade7" class="btnU"/>
-                <input type="button" value="+50k Cost(3,2mil)" id="upgrade8" class="btnU"/>
-                <input type="button" value="+250k Cost(15mil)" id="upgrade9" class="btnU"/> <br> <br>
-                <input type="button" value="+1mil Cost(50mil)" id="upgrade10" class="btnU"/>
-                <input type="button" value="+10mil Cost(400mil)" id="upgrade11" class="btnU"/>
-                <input type="button" value="+100mil Cost(3bil)" id="upgrade12" class="btnU"/> <br> <br>
+                <input type="button" value="+10,000 Cost(700,000)" id="upgrade7" class="btnU" data-cost="700000" data-addval="10000" data-progress="0.0007"/>
+                <input type="button" value="+50k Cost(3,2mil)" id="upgrade8" class="btnU" data-cost="3200000" data-addval="50000" data-progress="0.0008"/>
+                <input type="button" value="+250k Cost(15mil)" id="upgrade9" class="btnU" data-cost="15000000" data-addval="250000" data-progress="0.0009"/> <br> <br>
+                <input type="button" value="+1mil Cost(50mil)" id="upgrade10" class="btnU" data-cost="50000000" data-addval="1000000" data-progress="0.001"/>
+                <input type="button" value="+10mil Cost(400mil)" id="upgrade11" class="btnU" data-cost="400000000" data-addval="10000000" data-progress="0.0003"/>
+                <input type="button" value="+100mil Cost(3bil)" id="upgrade12" class="btnU" data-cost="3000000000" data-addval="100000000" data-progress="0.005"/> <br> <br>
                 <input type="button" value="<--" class="buttonPagePrevious">
                 <span class="pageCounter">Current page: 2</span>
                 <input type="button" value="-->" class="buttonPageNext">
             </div>
             <div id="pageThree">
-                <input type="button" value="+500mil Cost(14bil)" id="upgrade13" class="btnU"/>
-                <input type="button" value="+2bil Cost(60bil)" id="upgrade14" class="btnU"/>
-                <input type="button" value="+10bil Cost(300bil)" id="upgrade15" class="btnU"/> <br> <br>
-                <input type="button" value="+50bil Cost(1tril)" id="upgrade16" class="btnU"/>
-                <input type="button" value="+500bil Cost(9tril)" id="upgrade17" class="btnU"/>
-                <input type="button" value="+10tril Cost(150tril)" id="upgrade18" class="btnU"/> <br> <br>
+                <input type="button" value="+500mil Cost(14bil)" id="upgrade13" class="btnU" data-cost="14000000000" data-addval="500000000" data-progress="0.007"/>
+                <input type="button" value="+2bil Cost(60bil)" id="upgrade14" class="btnU" data-cost="60000000000" data-addval="2000000000" data-progress="0.008"/>
+                <input type="button" value="+10bil Cost(300bil)" id="upgrade15" class="btnU" data-cost="300000000000" data-addval="10000000000" data-progress="0.009"/> <br> <br>
+                <input type="button" value="+50bil Cost(1tril)" id="upgrade16" class="btnU" data-cost="1000000000000" data-addval="50000000000" data-progress="0.01"/>
+                <input type="button" value="+500bil Cost(9tril)" id="upgrade17" class="btnU" data-cost="9000000000000" data-addval="500000000000" data-progress="0.08"/>
+                <input type="button" value="+10tril Cost(150tril)" id="upgrade18" class="btnU" data-cost="150000000000000" data-addval="10000000000000" data-progress="0.2"/> <br> <br>
                 <input type="button" value="<--" class="buttonPagePrevious">
                 <span class="pageCounter">Current page: 3</span>
                 <input type="button" value="-->" class="buttonPageNext">
@@ -86,34 +87,34 @@
 
             <h1>Automatic Upgrades</h1>
             <div id="autoPageOne">
-                <input type="button" value="+1 P/sec Cost(75)" id="automaticUpgrade1" class="btnU"/>
-                <input type="button" value="+5 P/sec Cost(350)" id="automaticUpgrade2" class="btnU"/>
-                <input type="button" value="+15 P/sec Cost(1000)" id="automaticUpgrade3" class="btnU"/> <br> <br>
-                <input type="button" value="+50 P/sec Cost(3500)" id="automaticUpgrade4" class="btnU"/>
-                <input type="button" value="+150 P/sec Cost(10.000)" id="automaticUpgrade5" class="btnU"/>
-                <input type="button" value="+1000 P/sec Cost(60.000)" id="automaticUpgrade6" class="btnU"/> <br> <br>
+                <input type="button" value="+1 P/sec Cost(75)" id="automaticUpgrade1" class="btnUA" data-cost="75" data-gain="1" data-progress="0.0001"/>
+                <input type="button" value="+5 P/sec Cost(350)" id="automaticUpgrade2" class="btnUA" data-cost="350" data-gain="5" data-progress="0.00015"/>
+                <input type="button" value="+15 P/sec Cost(1000)" id="automaticUpgrade3" class="btnUA" data-cost="1000" data-gain="15" data-progress="0.0002"/> <br> <br>
+                <input type="button" value="+50 P/sec Cost(3500)" id="automaticUpgrade4" class="btnUA" data-cost="3500" data-gain="50" data-progress="0.0003"/>
+                <input type="button" value="+150 P/sec Cost(10.000)" id="automaticUpgrade5" class="btnUA" data-cost="10000" data-gain="150" data-progress="0.0004"/>
+                <input type="button" value="+1000 P/sec Cost(60.000)" id="automaticUpgrade6" class="btnUA" data-cost="60000" data-gain="1000" data-progress="0.0005"/> <br> <br>
                 <input type="button" value="<--" class="buttonPagePreviousAuto">
                 <span class="pageCounterAuto">Current page: 1</span>
                 <input type="button" value="-->" class="buttonPageNextAuto">
             </div>
             <div id="autoPageTwo">
-                <input type="button" value="+10,000 P/sec Cost(500k)" id="automaticUpgrade7" class="btnU"/>
-                <input type="button" value="+25k P/sec Cost(2,3mil)" id="automaticUpgrade8" class="btnU"/>
-                <input type="button" value="+100k P/sec Cost(7mil)" id="automaticUpgrade9" class="btnU"/> <br> <br>
-                <input type="button" value="+400k P/sec Cost(25mil)" id="automaticUpgrade10" class="btnU"/>
-                <input type="button" value="+2,5mil P/sec Cost(150mil)" id="automaticUpgrade11" class="btnU"/>
-                <input type="button" value="+12mil P/sec Cost(600mil)" id="automaticUpgrade12" class="btnU"/> <br> <br>
+                <input type="button" value="+10,000 P/sec Cost(500k)" id="automaticUpgrade7" class="btnUA" data-cost="500000" data-gain="10000" data-progress="0.0006"/>
+                <input type="button" value="+25k P/sec Cost(2,3mil)" id="automaticUpgrade8" class="btnUA" data-cost="2300000" data-gain="25000" data-progress="0.0007"/>
+                <input type="button" value="+100k P/sec Cost(7mil)" id="automaticUpgrade9" class="btnUA" data-cost="7000000" data-gain="100000" data-progress="0.0008"/> <br> <br>
+                <input type="button" value="+400k P/sec Cost(25mil)" id="automaticUpgrade10" class="btnUA" data-cost="25000000" data-gain="400000" data-progress="0.0009"/>
+                <input type="button" value="+2,5mil P/sec Cost(150mil)" id="automaticUpgrade11" class="btnUA" data-cost="150000000" data-gain="2500000" data-progress="0.001"/>
+                <input type="button" value="+12mil P/sec Cost(600mil)" id="automaticUpgrade12" class="btnUA" data-cost="600000000" data-gain="12000000" data-progress="0.003"/> <br> <br>
                 <input type="button" value="<--" class="buttonPagePreviousAuto">
                 <span class="pageCounterAuto">Current page: 2</span>
                 <input type="button" value="-->" class="buttonPageNextAuto">
             </div>
             <div id="autoPageThree">
-                <input type="button" value="+250mil P/sec Cost(10bil)" id="automaticUpgrade13" class="btnU"/>
-                <input type="button" value="+1bil P/sec Cost(40bil)" id="automaticUpgrade14" class="btnU"/>
-                <input type="button" value="+5bil P/sec Cost(180bil)" id="automaticUpgrade15" class="btnU"/> <br> <br>
-                <input type="button" value="+25bil P/sec Cost(800bil)" id="automaticUpgrade16" class="btnU"/>
-                <input type="button" value="+50bil P/sec Cost(7tril)" id="automaticUpgrade17" class="btnU"/>
-                <input type="button" value="+500bil P/sec Cost(120tril)" id="automaticUpgrade18" class="btnU"/> <br> <br>
+                <input type="button" value="+250mil P/sec Cost(10bil)" id="automaticUpgrade13" class="btnUA" data-cost="10000000000" data-gain="250000000" data-progress="0.006"/>
+                <input type="button" value="+1bil P/sec Cost(40bil)" id="automaticUpgrade14" class="btnUA" data-cost="40000000000" data-gain="1000000000" data-progress="0.009"/>
+                <input type="button" value="+5bil P/sec Cost(180bil)" id="automaticUpgrade15" class="btnUA" data-cost="180000000000" data-gain="5000000000" data-progress="0.01"/> <br> <br>
+                <input type="button" value="+25bil P/sec Cost(800bil)" id="automaticUpgrade16" class="btnUA" data-cost="800000000000" data-gain="25000000000" data-progress="0.03"/>
+                <input type="button" value="+50bil P/sec Cost(7tril)" id="automaticUpgrade17" class="btnUA" data-cost="7000000000000" data-gain="50000000000" data-progress="0.07"/>
+                <input type="button" value="+500bil P/sec Cost(120tril)" id="automaticUpgrade18" class="btnUA" data-cost="120000000000000" data-gain="500000000000" data-progress="0.2"/> <br> <br>
                 <input type="button" value="<--" class="buttonPagePreviousAuto">
                 <span class="pageCounterAuto">Current page: 3</span>
                 <input type="button" value="-->" class="buttonPageNextAuto">
@@ -133,10 +134,10 @@
         </div>
     </div>
     <br> <br> 
-    <!--  CHEATS, only for testing 
+
         <input type="button" value="Cheat +1000" id="cheat"/>
         <input type="button" value="Cheat +10000" id="cheat2"/>
-    --> 
+
 
 
     <script type="module" src="main.js"></script>

@@ -1,44 +1,8 @@
 
-import { upgradeCheck } from "./util.js";
+import { upgradeCheck } from "./Functions/upgradeCheck.js";
 import {
     clickButton,
-    up1,
-    up2, 
-    up3, 
-    up4, 
-    up5, 
-    up6, 
-    up7, 
-    up8, 
-    up9, 
-    up10,
-    up11,
-    up12,
-    up13,
-    up14,
-    up15,
-    up16,
-    up17,
-    up18,
-    automaticUpgrade1,
-    automaticUpgrade2,
-    automaticUpgrade3,
-    automaticUpgrade4,
-    automaticUpgrade5,
-    automaticUpgrade6,
-    automaticUpgrade7,
-    automaticUpgrade8,
-    automaticUpgrade9,
-    automaticUpgrade10,
-    automaticUpgrade11,
-    automaticUpgrade12,
-    automaticUpgrade13,
-    automaticUpgrade14,
-    automaticUpgrade15,
-    automaticUpgrade16,
-    automaticUpgrade17,
-    automaticUpgrade18,
-} from "./common.js";
+} from "./Common/constants.js";
 
 
 let clicks = 0;
@@ -55,8 +19,10 @@ openSettings.addEventListener("click", e => {
     if( settingsStatus == 0) {
         settingsWin.style.display = "block";
         settingsStatus = 1;
+        langStatus = 0;
     } else if ( settingsStatus == 1){
         settingsWin.style.display = "none";
+        languageWin.style.display = "none";
         settingsStatus = 0;
     }
 });
@@ -91,44 +57,6 @@ soundMuteButton.addEventListener("click", e => {
     }
 });
 
-// pop up collectables system
-const yellowSquare = document.getElementById("yellow-square");
-yellowSquare.addEventListener("click", onClickYellowSquare);
-
-function getRandomPosition() {
-    const winWidth = window.innerWidth - 70;
-    const winHeight = window.innerHeight - 70;
-    const randomX = Math.floor(Math.random() * winWidth);
-    const randomY = Math.floor(Math.random() * winHeight);
-    return { x: randomX, y: randomY};
-}
-
-function showYellowSquare() {
-    const yellowSquare = document.getElementById("yellow-square");
-    const position = getRandomPosition();
-    yellowSquare.style.left = position.x + "px";
-    yellowSquare.style.top = position.y + "px";
-    yellowSquare.style.display = "flex";
-
-    const randomDuration = Math.floor(Math.random() * 6000) + 5000; // Between 5 to 10 seconds
-    setTimeout(hideYellowSquare, randomDuration);
-}
-
-function hideYellowSquare() {
-    const yellowSquare = document.getElementById("yellow-square");
-    yellowSquare.style.display = "none";
-}
-
-function onClickYellowSquare() {
-    clicks = clicks + value * currentMultiplayer * Math.floor(Math.random()*14)
-    hideYellowSquare();
-    if(soundStatus == 0) {
-        document.getElementById("bonus").play();
-    }
-}
-
-setInterval(showYellowSquare, 10000); // Repeat the process every 10 seconds
-
 //reset system
 const resetButton = document.getElementById("resetButton");
 const currentMultiplayerShow = document.getElementById("multiplayer");
@@ -145,6 +73,7 @@ resetButton.addEventListener("click", reset)
 
 function reset() {
     clicks = 0;
+    document.getElementById("score").innerHTML = clicks.toFixed(2);
     value = 1;
     document.getElementById("clickValue").innerHTML = "Click Value: " + value;
 
@@ -175,11 +104,43 @@ function reset() {
     }
 }
 
+// pop up collectables system
+const yellowSquare = document.getElementById("yellow-square");
+yellowSquare.addEventListener("click", onClickYellowSquare);
+
+import {
+    getRandomPosition,
+    hideYellowSquare
+} from "./Functions/pop-up-collectables-functions.js";
+
+function showYellowSquare() {
+    const yellowSquare = document.getElementById("yellow-square");
+    const position = getRandomPosition();
+    yellowSquare.style.left = position.x + "px";
+    yellowSquare.style.top = position.y + "px";
+    yellowSquare.style.display = "flex";
+
+    const randomDuration = Math.floor(Math.random() * 6000) + 5000; // Between 5 to 10 seconds
+    setTimeout(hideYellowSquare, randomDuration);
+}
+
+function onClickYellowSquare() {
+    clicks = clicks + value * currentMultiplayer * Math.floor(Math.random()*14)
+    hideYellowSquare();
+    document.getElementById("score").innerHTML = clicks.toFixed(2);
+    if(soundStatus == 0) {
+        document.getElementById("bonus").play();
+    }
+}
+
+setInterval(showYellowSquare, 10000); // Repeat the process every 10 seconds
+
 // any document click will result in incrementing total clicks and checking if upgrades are avelibable
 document.addEventListener("click", e =>{
     totalClick += 1;
     document.getElementById("totalClicks").innerHTML = "All Clicks: "+totalClick;
-    upgradeCheck(clicks)
+    const clicks = parseFloat(document.getElementById("score").innerHTML);
+    upgradeCheck(clicks);
     afterResetMultiplayer()
 });
 document.addEventListener("mouseup", e => {
@@ -301,9 +262,9 @@ const autoPageThree = document.getElementById("autoPageThree");
 
 const showPageNumberAuto = document.querySelectorAll('.pageCounterAuto');
 
-function changePageAuto (x) {
+function changePageAuto (numberOfPage) {
     showPageNumberAuto.forEach((page) => {
-        page.innerHTML = "Current page: "+x
+        page.innerHTML = "Current page: "+numberOfPage
     });
 }
 
@@ -376,95 +337,33 @@ pageButtonPreviousAuto.forEach((button) => {
 
 // Upgrades system
 
-function upgrade (cost, addVal, progress) {
-    if(clicks >= cost) {
+function upgrade(cost, addVal, progress) {
+    if (clicks >= cost) {
         clicks = clicks - cost;
         document.getElementById("score").innerHTML = clicks.toFixed(2);
-        value += addVal;
-        document.getElementById("clickValue").innerHTML = "Click Value: "+value;
-        newMultiplayer = newMultiplayer + progress
-        if(soundStatus == 0) {
+        value += Number(addVal); // Convert addVal to a number using Number function
+        document.getElementById("clickValue").innerHTML = "Click Value: " + value;
+        newMultiplayer = newMultiplayer + progress;
+        if (soundStatus == 0) {
             document.getElementById("upgradeMusic").play();
         }
     }
 }
 
+const upgradeButtonsContainer = document.querySelectorAll(".btnU");
 
-up1.addEventListener("click", e => {
-    upgrade(100, 1, 0.0001)
-})
+upgradeButtonsContainer.forEach(button => {
+    button.addEventListener("click", e => {
+        const { cost, addval, progress } = e.target.dataset;
+        upgrade(parseInt(cost), parseFloat(addval), parseFloat(progress));
+    });
+});
 
-up2.addEventListener("click", e => {
-    upgrade(475, 5, 0.0002)
-})
-
-up3.addEventListener("click", e => {
-    upgrade(900, 10, 0.0003)
-})
-
-up4.addEventListener("click", e => {
-    upgrade(4250, 50, 0.0004)
-})
-
-up5.addEventListener("click", e => {
-    upgrade(8000, 100, 0.0005)
-})
-
-up6.addEventListener("click", e => {
-    upgrade(75000, 1000, 0.0006)
-})
-
-up7.addEventListener("click", e => {
-    upgrade(700000, 10000, 0.0007)
-})
-
-up8.addEventListener("click", e => {
-    upgrade(3200000, 50000, 0.0008)
-})
-
-up9.addEventListener("click", e => {
-    upgrade(15000000, 250000, 0.0009)
-})
-
-up10.addEventListener("click", e => {
-    upgrade(50000000, 1000000, 0.001)
-})
-
-up11.addEventListener("click", e => {
-    upgrade(400000000, 10000000, 0.003)
-})
-
-up12.addEventListener("click", e => {
-    upgrade(3000000000, 100000000, 0.005)
-})
-
-up13.addEventListener("click", e => {
-    upgrade(14000000000, 500000000, 0.007)
-})
-
-up14.addEventListener("click", e => {
-    upgrade(60000000000, 2000000000, 0.008)
-})
-
-up15.addEventListener("click", e => {
-    upgrade(300000000000, 10000000000, 0.009)
-})
-
-up16.addEventListener("click", e => {
-    upgrade(1000000000000, 50000000000, 0.01)
-})
-
-up17.addEventListener("click", e => {
-    upgrade(9000000000000, 500000000000, 0.08)
-})
-
-up18.addEventListener("click", e => {
-    upgrade(150000000000000, 10000000000000, 0.5)
-})
 
 // auto upgrades
 let gainPerSecond = document.getElementById("gain");
 gainPerSecond.innerHTML = "Gain per sec: 0"; 
+let controlNumber = 0;
 
 function autoUpgrade (cost, gain, progress) {
     if(clicks >= cost) {
@@ -489,61 +388,16 @@ function autoUpgrade (cost, gain, progress) {
         }
     }
 }
-let controlNumber = 0;
-automaticUpgrade1.addEventListener("click", e => {
-    autoUpgrade(75,1, 0.0001)
-})
-automaticUpgrade2.addEventListener("click", e => {
-    autoUpgrade(350,5, 0.00015)
-})
-automaticUpgrade3.addEventListener("click", e => {
-    autoUpgrade(1000,15, 0.0002)
-})
-automaticUpgrade4.addEventListener("click", e => {
-    autoUpgrade(3500,50, 0.0003)
-})
-automaticUpgrade5.addEventListener("click", e => {
-    autoUpgrade(10000,150, 0.0004)
-})
-automaticUpgrade6.addEventListener("click", e => {
-    autoUpgrade(60000,1000, 0.0005)
-})
-automaticUpgrade7.addEventListener("click", e => {
-    autoUpgrade(500000,10000, 0.0006)
-})
-automaticUpgrade8.addEventListener("click", e => {
-    autoUpgrade(2300000,25000, 0.0007)
-})
-automaticUpgrade9.addEventListener("click", e => {
-    autoUpgrade(7000000,100000, 0.0008)
-})
-automaticUpgrade10.addEventListener("click", e => {
-    autoUpgrade(25000000,400000, 0.0009)
-})
-automaticUpgrade11.addEventListener("click", e => {
-    autoUpgrade(150000000,2500000, 0.001)
-})
-automaticUpgrade12.addEventListener("click", e => {
-    autoUpgrade(600000000,12000000, 0.003)
-})
-automaticUpgrade13.addEventListener("click", e => {
-    autoUpgrade(10000000000,250000000, 0.006)
-})
-automaticUpgrade14.addEventListener("click", e => {
-    autoUpgrade(40000000000,1000000000, 0.009)
-})
-automaticUpgrade15.addEventListener("click", e => {
-    autoUpgrade(180000000000,5000000000, 0.01)
-})
-automaticUpgrade16.addEventListener("click", e => {
-    autoUpgrade(800000000000,25000000000, 0.03)
-})
-automaticUpgrade17.addEventListener("click", e => {
-    autoUpgrade(7000000000000,50000000000, 0.07)
-})
-automaticUpgrade18.addEventListener("click", e => {
-    autoUpgrade(120000000000000,500000000000, 0.2)
-})
+
+const autoUpgradeButtonsContainer = document.querySelectorAll(".btnUA");
+
+autoUpgradeButtonsContainer.forEach(button => {
+    button.addEventListener("click", e => {
+        const { cost, gain, progress } = e.target.dataset;
+        autoUpgrade(parseInt(cost), parseFloat(gain), parseFloat(progress));
+    });
+});
+
 
 // Auto upgrades - Automatic incremenatation functions
 let intervalId = null;
@@ -563,14 +417,15 @@ function stopIncrement() {
   clearInterval(intervalId);
 };
 
-//cheats
-//export const cheat = document.getElementById("cheat");
-//export const cheat2 = document.getElementById("cheat2");
-//cheat.addEventListener("click", e => {
-//    clicks += 100000;
-//    document.getElementById("score").innerHTML = clicks.toFixed(2);
-//})
-//cheat2.addEventListener("click", e => {
-//    clicks += 500000000000;
-//    document.getElementById("score").innerHTML = clicks.toFixed(2);
-//})
+
+// cheats, only for testing 
+const cheat = document.getElementById("cheat");
+const cheat2 = document.getElementById("cheat2");
+cheat.addEventListener("click", e => {
+    clicks += 100000;
+    document.getElementById("score").innerHTML = clicks.toFixed(2);
+})
+cheat2.addEventListener("click", e => {
+    clicks += 500000000000;
+    document.getElementById("score").innerHTML = clicks.toFixed(2);
+})
