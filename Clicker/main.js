@@ -113,7 +113,10 @@ import {
     hideYellowSquare
 } from "./Functions/pop-up-collectables-functions.js";
 
+let pointsAddUp = 0;
 function showYellowSquare() {
+    pointsAddUp = value * currentMultiplayer * Math.floor(Math.random()*14)+1
+    document.getElementById("yellow-square-points").innerHTML = pointsAddUp.toFixed(0);
     const yellowSquare = document.getElementById("yellow-square");
     const position = getRandomPosition();
     yellowSquare.style.left = position.x + "px";
@@ -125,7 +128,7 @@ function showYellowSquare() {
 }
 
 function onClickYellowSquare() {
-    clicks = clicks + value * currentMultiplayer * Math.floor(Math.random()*14)
+    clicks = clicks + pointsAddUp;
     hideYellowSquare();
     document.getElementById("score").innerHTML = clicks.toFixed(2);
     if(soundStatus == 0) {
