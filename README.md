@@ -1,4 +1,7 @@
 # Improved-Clicker
+This is a simple web-game based on JavaScript. It's a classic clicker with working and implemented game loop witch is achived through resets that increase your multiplayer of clicks you gain
+
+
 To run this app you need to have some sort of a server.
 You can't run it directily from files. 
 I personaly would reccomend Live Server (VS code extention)
