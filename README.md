@@ -1,6 +1,6 @@
 # Improved-Clicker
 This is a simple web-game based on JavaScript. It's a classic clicker with working and implemented game loop witch is achived through resets that increase your multiplayer of clicks you gain
-<br>
+<br><br>
 You can try it out <a href="https://alex-g-r.github.io/Improved-Clicker/" target="_blank">here<a/>!
 
 To run this app on your PC you need to have some sort of a server.
