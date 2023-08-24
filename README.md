@@ -1,11 +1,12 @@
 # Improved-Clicker
 This is a simple web-game based on JavaScript. It's a classic clicker with working and implemented game loop witch is achived through resets that increase your multiplayer of clicks you gain
 
+You can try it out <a href="https://alex-g-r.github.io/Improved-Clicker/" target="_blank">here<a/>!
 
-To run this app you need to have some sort of a server.
+To run this app on your PC you need to have some sort of a server.
 You can't run it directily from files. 
 I personaly would reccomend Live Server (VS code extention)
-But there are other options (copied from Stack Overflow - https://stackoverflow.com/questions/52919331/access-to-script-at-from-origin-null-has-been-blocked-by-cors-policy/66951910#66951910?newreg=e180875d1b424d43825b58368bd4b459)
+But there are other options (copied from Stack Overflow - <a href="https://stackoverflow.com/questions/52919331/access-to-script-at-from-origin-null-has-been-blocked-by-cors-policy/66951910#66951910?newreg=e180875d1b424d43825b58368bd4b459)">link</a>
 
 "Looks like you're trying to open the web-page locally (via file:// protocol) i.e. double clicking the .html file.
 Unfortunately modules only work via HTTP(s), so all you need to do is use a local web server. Popular choices include:
